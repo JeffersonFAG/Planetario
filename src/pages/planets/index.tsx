@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { planet_default } from '@/assets';
-import { Planet } from '@/src/types/Planet';
+import { bannerBg, planet_default } from "@/assets";
+import { Planet } from "@/src/types/Planet";
 import {
   Pagination,
   PlanetCard,
   SearchInput,
   SortSelect,
-} from '@/src/components';
+} from "@/src/components";
 
 const PlanetsPage = () => {
   const [planets, setPlanets] = useState<Planet[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [order, setOrder] = useState('asc');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [order, setOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const resultsPerPage = 5;
 
   const fetchPlanets = async () => {
     const response = await fetch(
-      'https://api.le-systeme-solaire.net/rest/bodies/'
+      "https://api.le-systeme-solaire.net/rest/bodies/"
     );
     const data = await response.json();
     const filteredPlanets = data.bodies.filter((body: any) => body.isPlanet);
@@ -31,7 +31,6 @@ const PlanetsPage = () => {
     setPlanets(planetsWithImages);
   };
   useEffect(() => {
-
     fetchPlanets();
   }, []);
 
@@ -40,7 +39,7 @@ const PlanetsPage = () => {
       planet.englishName.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) =>
-      order === 'asc'
+      order === "asc"
         ? a.englishName.localeCompare(b.englishName)
         : b.englishName.localeCompare(a.englishName)
     );
@@ -50,10 +49,16 @@ const PlanetsPage = () => {
     (currentPage - 1) * resultsPerPage,
     currentPage * resultsPerPage
   );
-
+  const backgroundStyle = {
+    backgroundImage: `linear-gradient(180deg, rgba(102, 102, 102, 0.0) 43.98%, #000 99.91%), linear-gradient(180deg, #000 0.42%, rgba(102, 102, 102, 0.0) 20.35%), url(${bannerBg})`,
+    // backgroundColor: "lightgray",
+    // backgroundPosition: "50%",
+    // backgroundSize: "cover",
+    // backgroundRepeat: "no-repeat",
+  };
   return (
-    <div className="flex flex-col items-center w-full">
-      {' '}
+    <div style={backgroundStyle} className="flex flex-col items-center w-full">
+      {" "}
       {/* Added flexbox for centering */}
       <h1 className="text-2xl text-center font-bold mt-12 mb-20">
         Listado de Planetas
