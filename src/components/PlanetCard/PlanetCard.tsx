@@ -1,13 +1,13 @@
 import React from "react";
-import { Planet } from "../../types/Planet";
 import Link from "next/link";
 import Image from "next/image";
+import { Planet } from "@/src/types/Planet";
 
 interface PlanetCardProps {
   planet: Planet;
 }
 
-const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
+export const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
   console.log("planet", planet);
   return (
     <Link href={`/planets/${planet.id}`}>
@@ -28,4 +28,3 @@ const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
   );
 };
 
-export default PlanetCard;

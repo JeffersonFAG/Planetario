@@ -6,12 +6,12 @@ interface SortSelectProps {
   onChange: (value: string) => void;
 }
 
-const SortSelect: React.FC<SortSelectProps> = ({ order, onChange }) => {
+export const SortSelect: React.FC<SortSelectProps> = ({ order, onChange }) => {
   return (
     <select
       value={order}
       onChange={(e) => onChange(e.target.value)}
-      className="border rounded p-2 mb-4 text-black"
+      className="border rounded p-2 text-black"
     >
       <option value="asc">Ordenar A-Z</option>
       <option value="desc">Ordenar Z-A</option>
@@ -19,4 +19,4 @@ const SortSelect: React.FC<SortSelectProps> = ({ order, onChange }) => {
   );
 };
 
-export default SortSelect;
+

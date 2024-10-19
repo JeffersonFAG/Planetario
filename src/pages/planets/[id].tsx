@@ -1,8 +1,9 @@
 // pages/planets/[id].tsx
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { Planet } from "../../types/Planet";
-import { planet_default } from "@/assets";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
+import { planet_default } from '@/assets';
+import { Planet } from '@/src/types/Planet';
 
 const PlanetDetailPage = () => {
   const router = useRouter();
@@ -46,15 +47,15 @@ const PlanetDetailPage = () => {
         className="w-full h-64 object-cover rounded"
       />
       <p>
-        Masa: {planet.mass.value} {planet.mass.unit}
+        Masa: {planet.mass.massValue} {planet.mass.unit}
       </p>
       <button
         onClick={handleToggleFavorite}
         className={`mt-4 px-4 py-2 rounded ${
-          isFavorite ? "bg-red-500" : "bg-blue-500"
+          isFavorite ? 'bg-red-500' : 'bg-blue-500'
         }`}
       >
-        {isFavorite ? "Eliminar de Favoritos" : "Agregar a Favoritos"}
+        {isFavorite ? 'Eliminar de Favoritos' : 'Agregar a Favoritos'}
       </button>
     </div>
   );
