@@ -1,7 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Planet } from '@/src/types/Planet';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Planet } from "@/src/types/Planet";
+import { PLANET_PAGE } from "@/src/Domain/paths";
 
 interface PlanetCardProps {
   planet: Planet;
@@ -9,7 +10,7 @@ interface PlanetCardProps {
 
 export const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
   return (
-    <Link href={`/planets/${planet.id}`}>
+    <Link href={`${PLANET_PAGE}${planet.id}`}>
       <div className="border rounded p-4 cursor-pointer hover:shadow-lg">
         <Image
           width={300}
