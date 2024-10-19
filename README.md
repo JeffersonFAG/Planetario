@@ -21,5 +21,12 @@ Una aplicación web que muestra un listado de planetas del sistema solar utiliza
 
 - `/pages`: Páginas de la aplicación.
 - `/components`: Componentes reutilizables.
-- `/store`: Manejo del estado (opcional).
+- `/store`: Manejo del estado.
 - `/types`: Tipos TypeScript.
+
+## Notas
+
+- Cada card renderiza la imagen del planeta, Nombre y su masa.
+- Detalle del planeta permite ver un poco más del planeta seleccionado.
+- Puedes guardarlo en favoritos (Se almacena en el localstorage).
+- Se utiliza zustand para tener un control global de la información de manera agil.
