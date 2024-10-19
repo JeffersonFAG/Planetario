@@ -9,6 +9,7 @@ interface SortSelectProps {
 export const SortSelect: React.FC<SortSelectProps> = ({ order, onChange }) => {
   return (
     <select
+      aria-label="select order"
       value={order}
       onChange={(e) => onChange(e.target.value)}
       className="border rounded p-2 text-black"
@@ -18,5 +19,3 @@ export const SortSelect: React.FC<SortSelectProps> = ({ order, onChange }) => {
     </select>
   );
 };
-
-
