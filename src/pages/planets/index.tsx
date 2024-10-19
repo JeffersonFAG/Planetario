@@ -16,21 +16,21 @@ const PlanetsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const resultsPerPage = 5;
 
+  const fetchPlanets = async () => {
+    const response = await fetch(
+      'https://api.le-systeme-solaire.net/rest/bodies/'
+    );
+    const data = await response.json();
+    const filteredPlanets = data.bodies.filter((body: any) => body.isPlanet);
+    const planetsWithImages = filteredPlanets.map((planet: any) => ({
+      id: planet.id,
+      englishName: planet.englishName,
+      mass: planet.mass,
+      image: planet.image || planet_default,
+    }));
+    setPlanets(planetsWithImages);
+  };
   useEffect(() => {
-    const fetchPlanets = async () => {
-      const response = await fetch(
-        'https://api.le-systeme-solaire.net/rest/bodies/'
-      );
-      const data = await response.json();
-      const filteredPlanets = data.bodies.filter((body: any) => body.isPlanet);
-      const planetsWithImages = filteredPlanets.map((planet: any) => ({
-        id: planet.id,
-        englishName: planet.englishName,
-        mass: planet.mass,
-        image: planet.image || planet_default,
-      }));
-      setPlanets(planetsWithImages);
-    };
 
     fetchPlanets();
   }, []);
