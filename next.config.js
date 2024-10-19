@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/src/planets',
+        destination: '/planets',
         permanent: true,
       },
     ];
