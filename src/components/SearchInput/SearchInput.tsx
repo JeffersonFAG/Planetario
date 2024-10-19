@@ -6,7 +6,7 @@ interface SearchInputProps {
   onChange: (value: string) => void;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ value, onChange }) => {
+export const SearchInput: React.FC<SearchInputProps> = ({ value, onChange }) => {
   return (
     <input
       type="text"
@@ -18,4 +18,3 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChange }) => {
   );
 };
 
-export default SearchInput;
