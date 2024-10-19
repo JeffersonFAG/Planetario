@@ -1,40 +1,41 @@
-// pages/planets/[id].tsx
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
-
-import { planet_default } from "@/assets";
 import { Planet } from "@/src/types/Planet";
+import usePlanetStore from "@/src/store/planetsStaores";
 
 const PlanetDetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const handleBackButtonClick = () => router.back();
-
   const [planet, setPlanet] = useState<Planet | null>(null);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
-
-  const fetchPlanetDetails = async () => {
-    const response = await fetch(
-      `https://api.le-systeme-solaire.net/rest/bodies/${id}`
-    );
-    const data = await response.json();
-    setPlanet({
-      id: data.id,
-      englishName: data.englishName,
-      mass: data.mass,
-      image: data.image || planet_default,
-    });
-  };
+  const { planetList } = usePlanetStore();
 
   useEffect(() => {
     if (id) {
       fetchPlanetDetails();
     }
   }, [id]);
+
+  const fetchPlanetDetails = async () => {
+    const data = planetList.filter((planet: Planet) => planet.id === id);
+    const { englishName, mass, image, vol } = data[0];
+    const isFavoritePlanet = localStorage.getItem(id as string);
+
+    setIsFavorite(isFavoritePlanet === "true");
+    setPlanet({
+      id: data[0].id,
+      englishName: englishName,
+      mass: mass,
+      image,
+      vol,
+    });
+  };
+
+  const handleBackButtonClick = () => router.back();
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -73,7 +74,10 @@ const PlanetDetailPage = () => {
               Masa: {planet.mass.massValue} {planet.mass.unit}
             </p>
             <p className="text-gray-400 text-sm">
-              Masa: {planet.mass.massValue} {planet.mass.unit}
+              Volumen: {planet.vol.volValue}
+            </p>
+            <p className="text-gray-400 text-sm">
+              Volumen Expuesto: {planet.vol.volExponent}
             </p>
           </div>
         </div>
